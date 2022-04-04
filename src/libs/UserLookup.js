@@ -15,7 +15,7 @@ class UserLookup {
     }
 
     /**
-     * Function to retrieve a single user's information based on the tweeter id.
+     * Function to retrieve a single user's information based on the twitter id.
      * 
      * @param {Number} id 
      * @param {Object} objParams 
@@ -37,12 +37,41 @@ class UserLookup {
      * @returns {Promise<Object>}
      */
     async retrieveUserByIds(ids, objParams = {}){
-        const API_URL=`https://api.twitter.com/2/users/${ids}`;
+        const API_URL=`https://api.twitter.com/2/users?ids=${ids}`;
 
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
             .catch(error => this.Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
     }
 
+    /**
+     * Function to retrieve a single user's information based on the twitter username.
+     * 
+     * @param {String} userName 
+     * @param {Object} objParams 
+     * @returns {Promise<Object>}
+     */
+    async retrieveUserByUsername(userName, objParams = {}){
+        const API_URL=`https://api.twitter.com/2/users/by/username/${userName}`;
 
+        return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
+            .then(response => response.data)
+            .catch(error => this.Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+
+    }
+
+    /**
+     * Function to retrieve a users information based on a list of twitter usernames comma separated.
+     * 
+     * @param {String} userNames 
+     * @param {Object} objParams 
+     * @returns {Promise<Object>}
+     */
+    async retrieveUserByUsernames(userNames, objParams = {}){
+        const API_URL=`https://api.twitter.com/2/users/by?usernames=${userNames}`;
+
+        return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
+            .then(response => response.data)
+            .catch(error => this.Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+    }
 }

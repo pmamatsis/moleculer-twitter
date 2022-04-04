@@ -8,6 +8,7 @@
 
 const { MoleculerError } = require("moleculer").Errors;
 const TweetLookup = require("./libs/TweetLookup");
+const UserLookup = require("./libs/UserLookup");
 
 require("dotenv").config();
 
