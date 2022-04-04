@@ -12,3 +12,5 @@ test/
 .editorconfig
 .eslintrc.js
 prettier.config.js
+.env
+twitter-keys.txt
