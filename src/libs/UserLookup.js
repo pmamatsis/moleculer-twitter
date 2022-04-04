@@ -75,6 +75,12 @@ class UserLookup {
             .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
     }
 
+    /**
+     * Function to retrieve information about the authorized Twitter end-user.
+     * 
+     * @param {Object} objParams 
+     * @returns {Promise<Object>}
+     */
     async retrieveAuthUserLookup(objParams){
         const API_URL='https://api.twitter.com/2/me';
 
