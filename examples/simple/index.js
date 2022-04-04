@@ -16,7 +16,7 @@ broker.start().then(() => {
 
 	// Call action
 	broker
-		.call("twitter.test", { name: "John Doe" })
+		.call("twitter.retrieveSingleTweet", { id: 20 })
 		.then(broker.logger.info)
 		.catch(broker.logger.error);
 
