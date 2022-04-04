@@ -74,6 +74,14 @@ class UserLookup {
             .then(response => response.data)
             .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
     }
+
+    async retrieveAuthUserLookup(objParams){
+        const API_URL='https://api.twitter.com/2/me';
+
+        return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
+            .then(response => response.data)
+            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+    }
 }
 
 module.exports = {

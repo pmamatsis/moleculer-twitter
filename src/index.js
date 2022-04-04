@@ -82,6 +82,14 @@ module.exports = {
 			async handler(ctx) {
 				return await this.retrieveUserByUsernames(ctx.params.userNames, ctx.params.objParams);
 			}
+		},
+		retrieveAuthUserLookup: {
+			params: {
+				objParams: { type: "object", optional: true }
+			},
+			async handler(ctx) {
+				return await this.retrieveAuthUserLookup(ctx.params.objParams);
+			}
 		}
 	},
 
@@ -118,6 +126,11 @@ module.exports = {
 			const userLookup = new UserLookup(this.settings.twitterBearerToken);
 
 			return await userLookup.retrieveUserByUsernames(userNames, objParams);
+		},
+		async retrieveAuthUserLookup(objParams){
+			const userLookup = new UserLookup(this.settings.twitterBearerToken);
+
+			return await userLookup.retrieveAuthUserLookup(objParams);
 		}
 	},
 
