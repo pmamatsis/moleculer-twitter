@@ -1,5 +1,6 @@
 "use strict";
 
+const { MoleculerError } = require("moleculer").Errors;
 const axios = require("axios");
 
 class TweetLookup {
@@ -23,10 +24,10 @@ class TweetLookup {
      */
     async retrieveSingleTweet(id, objParams = {}){
         const API_URL=`https://api.twitter.com/2/tweets/${id}`;
-        
+
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
-            .catch(error => this.Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_TWEET_ERROR")));
+            .catch(error => Promise.reject(new MoleculerError(error.message + " " + error.detail, 500, "RETRIEVE_SINGLE_TWEET_ERROR")));
     }
 
     /**
@@ -40,9 +41,11 @@ class TweetLookup {
 
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
-            .catch(error => this.Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_MULTIPLE_TWEET_ERROR")));
+            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_MULTIPLE_TWEET_ERROR")));
 
     }
 }
 
-export default new TweetLookup();
+module.exports = {
+    TweetLookup
+}
