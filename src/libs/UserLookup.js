@@ -56,7 +56,7 @@ class UserLookup {
 
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
-            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_USERNAME_ERROR")));
 
     }
 
@@ -72,7 +72,7 @@ class UserLookup {
 
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
-            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_USERNAMES_ERROR")));
     }
 
     /**
@@ -86,7 +86,7 @@ class UserLookup {
 
         return axios.get(API_URL, {params: objParams, headers: {'content-type': 'application/json', 'Authorization': `Bearer ${this.bearerKey}`}})
             .then(response => response.data)
-            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_SINGLE_USER_BY_IDS_ERROR")));
+            .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_AUTH_USER_LOOKUP_ERROR")));
     }
 }
 
