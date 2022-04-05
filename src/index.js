@@ -10,6 +10,7 @@ const { MoleculerError } = require("moleculer").Errors;
 const { Context } = require("moleculer");
 const { TweetLookup } = require("./libs/TweetLookup");
 const { UserLookup } = require("./libs/UserLookup");
+const { Follow } = require("./libs/Follows");
 
 require("dotenv").config();
 
@@ -90,6 +91,42 @@ module.exports = {
 			async handler(ctx) {
 				return await this.retrieveAuthUserLookup(ctx.params.objParams);
 			}
+		},
+		retrieveFollowersOfUserId: {
+			params: {
+				id: { type: "number" },
+				objParams: { type: "object", optional: true }
+			},
+			async handler(ctx) {
+				return await this.retrieveFollowersOfUserId(ctx.params.id, ctx.params.objParams);
+			}
+		},
+		retrieveUserIdFollowing: {
+			params: {
+				id: { type: "number" },
+				objParams: { type: "object", optional: true }
+			},
+			async handler(ctx) {
+				return await this.retrieveUserIdFollowing(ctx.params.id, ctx.params.objParams);
+			}
+		},
+		followAUserId: {
+			params: {
+				id: { type: "number" },
+				targetUserId: { type: "number" }
+			},
+			async handler(ctx) {
+				return await this.followAUserId(ctx.params.id, ctx.params.targetUserId);
+			}
+		},
+		unFollowUserId: {
+			params: {
+				id: { type: "number" },
+				targetUserId: { type: "number" }
+			},
+			async handler(ctx) {
+				return await this.unFollowUserId(ctx.params.id, ctx.params.targetUserId);
+			}
 		}
 	},
 
@@ -131,6 +168,26 @@ module.exports = {
 			const userLookup = new UserLookup(this.settings.twitterBearerToken);
 
 			return await userLookup.retrieveAuthUserLookup(objParams);
+		},
+		async retrieveFollowersOfUserId(id, objParams){
+			const follow = new Follow(this.settings.twitterBearerToken);
+
+			return await follow.retrieveFollowersOfUserId(id, objParams);
+		},
+		async retrieveUserIdFollowing(id, objParams){
+			const follow = new Follow(this.settings.twitterBearerToken);
+
+			return await follow.retrieveUserIdFollowing(id, objParams);
+		},
+		async followAUserId(id, targetUserId){
+			const follow = new Follow(this.settings.twitterBearerToken);
+
+			return await follow.followAUserId(id, targetUserId);
+		},
+		async unFollowUserId(id, targetUserId){
+			const follow = new Follow(this.settings.twitterBearerToken);
+
+			return await follow.unFollowUserId(id, targetUserId);
 		}
 	},
 
