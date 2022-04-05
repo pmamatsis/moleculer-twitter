@@ -15,6 +15,13 @@ class Follow {
         this.bearerKey = bearerKey;
     }
 
+    /**
+     * Returns a list of users who are followers of the specified user ID.
+     * 
+     * @param {Number} id 
+     * @param {Object} objParams 
+     * @returns {Object}
+     */
     async retrieveFollowersOfUserId(id, objParams){
         const API_URL=`https://api.twitter.com/2/users/${id}/followers`;
 
@@ -23,6 +30,13 @@ class Follow {
             .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_FOLLOWERS_OF_USER_ID_ERROR")));
     }
 
+    /**
+     * Returns a list of users the specified user ID is following.
+     * 
+     * @param {String} id 
+     * @param {Object} objParams 
+     * @returns {Object}
+     */
     async retrieveUserIdFollowing(id, objParams){
         const API_URL=`https://api.twitter.com/2/users/${id}/following`;
 
@@ -31,6 +45,13 @@ class Follow {
             .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "RETRIEVE_USER_ID_FOLLOWING_ERROR")));
     }
 
+    /**
+     * Allows a user ID to follow another user.
+     * 
+     * @param {Number} id 
+     * @param {Number} targetUserId 
+     * @returns {Object}
+     */
     async followAUserId(id, targetUserId){
         const API_URL=`https://api.twitter.com/2/users/${id}/following`;
 
@@ -39,6 +60,13 @@ class Follow {
             .catch(error => Promise.reject(new MoleculerError(err.message + " " + err.detail, 500, "FOLLOW_USER_ID_ERROR")));
     }
 
+    /**
+     * Allows a user ID to unfollow another user.
+     * 
+     * @param {Number} id 
+     * @param {Number} targetUserId 
+     * @returns {Number}
+     */
     async unFollowUserId(id, targetUserId){
         const API_URL=`https://api.twitter.com/2/users/${id}/following/${targetUserId}`;
 
