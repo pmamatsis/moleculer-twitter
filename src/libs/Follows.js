@@ -1,3 +1,7 @@
+/**
+ * NOTE: The authentication of this class can be done via "Bearer Token" method.
+ */
+
 'use strict';
 
 const { MoleculerError } = require("moleculer").Errors;
